@@ -1,6 +1,6 @@
 
 
-<project name="TestNGTest" default="test" basedir=".">
+<project name="TestNGTest" default="transform" basedir=".">
 	<taskdef name="testng" classname="org.testng.TestNGAntTask">
 		<classpath>
 			<pathelement location="lib/selenium-server-standalone-2.49.0.jar"/>
@@ -39,5 +39,17 @@
 		<testng outputdir="${outputdir}" classpathref="classpath.test">
 			<xmlfileset dir="${srcdir}" includes="testng.xml" />
 		</testng>
+	
 	</target>
+	
+	<target name="transform" depends="test">
+		<xslt in="${outputdir}/testng-results.xml" style="${outputdir}/testng-results.xsl"  out="${outputdir}/chen-report.html">
+					<param name="testNgXslt.outputDir"  
+					expression="${outputdir}" />
+								<!-- you need to specify the directory here again -->
+								<classpath refid="classpath.test" />
+				</xslt>
+	</target>
+	
+	
 </project>

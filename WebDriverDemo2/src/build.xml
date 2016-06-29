@@ -39,5 +39,24 @@
 		<testng outputdir="${outputdir}" classpathhref="classpath.test">
 			<xmlfileset dir="{srcdir}" includes="testng.xml" />
 		</testng>
+		<xslt style=" ${outputdir}/testng-results.xsl" 
+						in = "${outputdir}/testng-results.xml"
+					   out = "${outputdir}/chenjian-report.html">
+					
+					<param name="testNgXslt.outputDir" expression="${outputdir}" />
+								<!-- you need to specify the directory here again -->
+								<classpath refid="classpath.test" />
+				</xslt>
 	</target>
+	
+<!--	<target name="transform" depends="test" >
+		<xslt style=" ${outputdir}/testng-results.xsl" 
+				in = "${outputdir}/testng-results.xml"
+			   out = "${outputdir}/chenjian-report.html">
+			
+			<param name="testNgXslt.outputDir" expression="${outputdir}" />
+											<classpath refid="classpath.test" />
+		</xslt>
+	</target> 
+	-->
 </project>
